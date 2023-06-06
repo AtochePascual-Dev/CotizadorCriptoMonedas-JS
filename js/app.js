@@ -48,6 +48,28 @@ const cotizarCriptomoneda = (event) => {
 
   // Validamos la informacion
   if ([moneda, criptomoneda].includes('')) {
+    mostrarAlerta('Seleccione una Moneda y Criptomoneda');
+    return;
+  };
+}
+
+
+
+// * Muestra una alerta en pantalla
+const mostrarAlerta = (mensaje) => {
+  const exiteAlerta = document.querySelector('.error');
+
+  if (!exiteAlerta) {
+    const alertaDiv = document.createElement('DIV');
+    alertaDiv.textContent = mensaje;
+    alertaDiv.classList.add('error');
+
+    formulario.appendChild(alertaDiv);
+
+    // Eliminamos la alerta
+    setTimeout(() => {
+      alertaDiv.remove();
+    }, 2000);
   }
 };
 
