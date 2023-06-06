@@ -51,6 +51,8 @@ const cotizarCriptomoneda = (event) => {
     mostrarAlerta('Seleccione una Moneda y Criptomoneda');
     return;
   };
+
+  cotizar(moneda, criptomoneda);
 }
 
 
@@ -72,6 +74,21 @@ const mostrarAlerta = (mensaje) => {
     }, 2000);
   }
 };
+
+
+
+// * Cotiza una criptomoneda
+const cotizar = (moneda, criptomoneda) => {
+  const URL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
+
+  fetch(URL)
+    .then(respuesta => respuesta.json())
+    .then(resultado => {
+      const { DISPLAY } = resultado;
+      mostrarCotizacion(DISPLAY[criptomoneda][moneda]);
+    });
+};
+
 
 
 // * EVENTOS
