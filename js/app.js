@@ -1,7 +1,7 @@
 // * VARIABLES
 const formulario = document.querySelector('#formulario');
 const moneda = document.querySelector('#moneda');
-const criptomonedas = document.querySelector('#criptomonedas');
+const selectCriptomonedas = document.querySelector('#criptomonedas');
 
 // * FUNCIONES
 // * Obtiene las 10 criptomonedas mas importante y los añada el select
@@ -12,7 +12,26 @@ const obtenerCriptomonedas = () => {
     .then(respuesta => respuesta.json())
     .then(resultado => {
       const criptomonedas = resultado.Data;
+      mostrarCriptoMonedas(criptomonedas);
     })
+};
+
+
+
+// * Muestra las criptomonedas obtenidas en el select
+const mostrarCriptoMonedas = (criptomonedas) => {
+
+  //  Iteremos sobre las criptomonedas
+  criptomonedas.forEach(criptomoneda => {
+    const { CoinInfo } = criptomoneda;
+    const { Name, FullName } = CoinInfo;
+    const option = document.createElement('OPTION');
+
+    option.textContent = FullName;
+    option.value = Name;
+
+    selectCriptomonedas.appendChild(option);
+  });
 };
 
 // * EVENTOS
