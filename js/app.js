@@ -1,7 +1,9 @@
 // * VARIABLES
 const formulario = document.querySelector('#formulario');
-const moneda = document.querySelector('#moneda');
+const selectMoneda = document.querySelector('#moneda');
 const selectCriptomonedas = document.querySelector('#criptomonedas');
+
+
 
 // * FUNCIONES
 // * Obtiene las 10 criptomonedas mas importante y los añada el select
@@ -34,8 +36,25 @@ const mostrarCriptoMonedas = (criptomonedas) => {
   });
 };
 
+
+
+// * Cotiza una criptomoneda
+const cotizarCriptomoneda = (event) => {
+  event.preventDefault();
+
+  // obtenemos los valores de los select
+  const moneda = selectMoneda.value;
+  const criptomoneda = selectCriptomonedas.value;
+
+  // Validamos la informacion
+  if ([moneda, criptomoneda].includes('')) {
+  }
+};
+
+
 // * EVENTOS
 // * Cuando el documento esta listo
 document.addEventListener('DOMContentLoaded', () => {
   obtenerCriptomonedas();
+  formulario.addEventListener('submit', cotizarCriptomoneda);
 });
