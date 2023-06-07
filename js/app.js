@@ -98,10 +98,7 @@ const cotizar = (moneda, criptomoneda) => {
 // * Muestra la cotizacion en pantalla
 const mostrarCotizacion = (cotizacion) => {
 
-  // Limpiamos el html previo
-  while (divResultado.firstChild) {
-    divResultado.firstChild.remove();
-  }
+  limpiarHtml();
 
   const { PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE } = cotizacion;
   const precio = document.createElement('P');
@@ -128,10 +125,7 @@ const mostrarCotizacion = (cotizacion) => {
 // * Muestra spinner
 const mostrarSpinner = () => {
 
-  // Limpiamos el html previo
-  while (divResultado.firstChild) {
-    divResultado.firstChild.remove();
-  }
+  limpiarHtml();
 
   const spinner = document.createElement('DIV');
   spinner.classList.add('spinner');
@@ -142,6 +136,14 @@ const mostrarSpinner = () => {
   `;
 
   divResultado.appendChild(spinner);
+};
+
+
+// * Limpia el html previo 
+const limpiarHtml = () => {
+  while (divResultado.firstChild) {
+    divResultado.firstChild.remove();
+  }
 };
 
 
