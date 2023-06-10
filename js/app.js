@@ -81,18 +81,20 @@ const mostrarAlerta = (mensaje) => {
 
 
 // * Cotiza una criptomoneda
-const cotizar = (moneda, criptomoneda) => {
+const cotizar = async (moneda, criptomoneda) => {
   const URL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
 
   mostrarSpinner();
 
-  fetch(URL)
-    .then(respuesta => respuesta.json())
-    .then(resultado => {
-      const { DISPLAY } = resultado;
-      const cotizacion = DISPLAY[criptomoneda][moneda]
-      mostrarCotizacion(cotizacion);
-    });
+  try {
+    const respuesta = await fetch(URL);
+    const resultado = await respuesta.json();
+    const { DISPLAY } = resultado;
+    const cotizacion = DISPLAY[criptomoneda][moneda]
+    mostrarCotizacion(cotizacion);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 
