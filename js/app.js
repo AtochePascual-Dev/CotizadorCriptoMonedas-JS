@@ -8,15 +8,17 @@ const divResultado = document.querySelector('#resultado');
 
 // * FUNCIONES
 // * Obtiene las 10 criptomonedas mas importante y los añada el select
-const obtenerCriptomonedas = () => {
+const obtenerCriptomonedas = async () => {
   const URL = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD`;
 
-  fetch(URL)
-    .then(respuesta => respuesta.json())
-    .then(resultado => {
-      const criptomonedas = resultado.Data;
-      mostrarCriptoMonedas(criptomonedas);
-    })
+  try {
+    const respuesta = await fetch(URL);
+    const resultado = await respuesta.json();
+    const criptomonedas = resultado.Data;
+    mostrarCriptoMonedas(criptomonedas);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 
